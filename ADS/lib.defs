@@ -1,0 +1,3 @@
+INCLUDE $HPEESOF_DIR/oalibs/analog_rf.defs
+DEFINE PAD_2021#2e01_FiltroRadio_lib PAD_2021.01_FiltroRadio_lib
+ASSIGN PAD_2021#2e01_FiltroRadio_lib libMode shared

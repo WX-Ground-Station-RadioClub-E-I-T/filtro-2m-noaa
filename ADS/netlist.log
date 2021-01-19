@@ -1,0 +1,41 @@
+; Top Design: "PAD_2021.01_FiltroRadio_lib:Filtro_tb:schematic"
+; Netlisted using Hierarchy Policy: "Standard"
+
+Options ResourceUsage=yes UseNutmegFormat=no EnableOptim=no TopDesignName="PAD_2021.01_FiltroRadio_lib:Filtro_tb:schematic" DcopOutputNodeVoltages=yes DcopOutputPinCurrents=yes DcopOutputAllSweepPoints=no DcopOutputDcopType=0
+; Library Name: PAD_2021.01_FiltroRadio_lib
+; Cell Name: filtro_teorico
+; View Name: schematic
+define filtro_teorico ( P1  P2 ) 
+;parameters 
+C:C1  P1 N__3 C=10 pF 
+C:C2  N__3 N__5 C=2.2 pF 
+C:C7  N__3 0 C=2.7 pF 
+C:C4  N__5 N__7 C=1.5 pF 
+C:C6  N__9 P2 C=10 pF 
+C:C5  N__7 N__9 C=2.2 pF 
+L:L1  N__3 0 L=100 nH Noise=yes  
+C:C8  N__5 0 C=10 pF 
+L:L2  N__5 0 L=100 nH Noise=yes  
+C:C9  N__7 0 C=10 pF 
+L:L3  N__7 0 L=100 nH Noise=yes  
+C:C10  N__9 0 C=2.7 pF 
+L:L4  N__9 0 L=100 nH Noise=yes  
+end filtro_teorico
+
+filtro_teorico:X1  N__1 N__0 
+S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 \
+SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output" 
+
+SweepPlan: SP1_stim Start=60 MHz Stop=350 MHz Lin=500 
+
+OutputPlan:SP1_Output \
+      Type="Output" \
+      UseEquationNestLevel=yes \
+      EquationNestLevel=2 \
+      UseSavedEquationNestLevel=yes \
+      SavedEquationNestLevel=2
+
+#load "python","LinearCollapse"
+Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2
+Port:Term1  N__1 0 Num=1 Z=50 Ohm Noise=yes 
+Port:Term2  N__0 0 Num=2 Z=50 Ohm Noise=yes 
