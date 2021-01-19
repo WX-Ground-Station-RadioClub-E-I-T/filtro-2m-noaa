@@ -32,4 +32,4 @@ Esquemático:
 
 Modelo 3D:
 
-![](retultados/PCBDelante.png)
+![](resultados/PCBDelante.png)
